@@ -2051,10 +2051,10 @@ eslint-plugin-tailwind@^0.2.1:
   dependencies:
     eslint-html-parser "^1.0.1"
 
-eslint-plugin-tailwindcss@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-tailwindcss/-/eslint-plugin-tailwindcss-3.1.0.tgz#6b868b55947ad1920be9b4e31ff4490f4b3fff36"
-  integrity sha512-C0ZH/8XOFEQ0Yi+Vq0A9uOBZZ8/zCY6IfMNse5c2anJhwfTQd6igXRImAdCNwN04eJSEHDBkC4vihC5FnheUKQ==
+eslint-plugin-tailwindcss@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-tailwindcss/-/eslint-plugin-tailwindcss-3.1.2.tgz#c8a8161a962a7c019f1188ee16a9f640f5c5399d"
+  integrity sha512-wuhnf+hc3/3+8SWe9Hy+eIL+JAdSAR0dtCbtCYIVy69ULzobO0xRql7O1uJ1sRyrQpjxMezSygQJA1MiCYv5SQ==
   dependencies:
     fast-glob "^3.2.5"
     postcss "^8.4.4"
