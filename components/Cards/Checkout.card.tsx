@@ -1,24 +1,34 @@
 import { FC } from "react";
 
-interface props {
-  data: any;
-  amount: number | null;
-  defaultAmounts: number[];
-  loading: boolean;
-  setAmount: any;
-  setLoading: any;
-  createCheckoutSession: any;
-}
+import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
+import { useState } from "react";
+const stripePromise = loadStripe(process.env.stripe_public_key!);
+import data from "../../public/data.json";
 
-const CheckoutCard: FC<props> = ({
-  data,
-  amount,
-  defaultAmounts,
-  loading,
-  setAmount,
-  setLoading,
-  createCheckoutSession,
-}) => {
+const CheckoutCard: FC = () => {
+  const [amount, setAmount] = useState<number | null>(data.defaultAmounts[1]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const defaultAmounts = data.defaultAmounts;
+
+  const createCheckOutSession = async () => {
+    setLoading(true);
+    const stripe = await stripePromise;
+
+    const checkoutSession = await axios.post("/api/create-checkout-session", {
+      amount: amount,
+    });
+
+    const result = await stripe?.redirectToCheckout({
+      sessionId: checkoutSession.data.id,
+    });
+
+    if (result?.error) {
+      alert(result?.error.message);
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <div className="z-50 mt-10 flex w-[90vw] flex-col items-center space-y-5 rounded-md bg-darkerBlue p-10 px-5 shadow-xl sm:w-[436px] sm:px-10">
@@ -56,7 +66,7 @@ const CheckoutCard: FC<props> = ({
         </div>
         <button
           disabled={!amount || loading}
-          onClick={createCheckoutSession}
+          onClick={createCheckOutSession}
           role="link"
           className={`group mt-4 flex w-full items-center justify-center rounded-lg border-2 border-accent bg-accent px-6 py-3 text-xl font-semibold transition duration-200 hover:border-accent hover:bg-transparent hover:text-accent ${
             amount || loading ? "" : "cursor-not-allowed opacity-50"
