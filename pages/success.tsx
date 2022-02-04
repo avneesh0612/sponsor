@@ -1,7 +1,7 @@
 const success = () => {
   return (
-    <div className="flex flex-col w-screen min-h-screen overflow-x-hidden bg-darkBlue justify-center items-center">
-      <h2 className="text-accent text-3xl font-semibold">
+    <div className="flex min-h-screen w-screen flex-col items-center justify-center overflow-x-hidden bg-darkBlue">
+      <h2 className="text-3xl font-semibold text-accent">
         Thank you for sponsoring me! 💙
       </h2>
     </div>
