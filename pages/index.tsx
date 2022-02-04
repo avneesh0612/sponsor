@@ -57,14 +57,14 @@ export default function Home() {
             Thanks in advance. Each donation of yours means a lot, however
             little it might be!
           </p>
-          <div className="bg-[#E9F9FA]/30  flex items-center focus:outline-none text-white rounded-lg w-full">
-            <p className="bg-[#E7EAEA]/70 uppercase text-lg text-black rounded-l-lg px-4 py-3">
+          <div className="bg-[#E9F9FA]/30 group flex items-center focus:outline-none text-white rounded-lg w-full">
+            <p className="bg-[#E7EAEA]/70 uppercase text-lg text-black rounded-l-lg px-4 py-3 opacity-80 group-hover:opacity-100 transition duration-200">
               {data.currency}
             </p>
             <input
               type="number"
               value={amount ? amount : ""}
-              className="w-full px-4 py-3 text-white bg-transparent rounded-lg focus:outline-none"
+              className="w-full px-4 py-3 text-white bg-transparent rounded-lg focus:outline-none opacity-80 group-hover:opacity-100 transition duration-200"
               placeholder="Enter Amount"
               onChange={(e) => setAmount(parseInt(e.target.value))}
             />
@@ -74,7 +74,7 @@ export default function Home() {
               <button
                 className={`${
                   amount === buttonAmount ? "bg-accent" : "bg-[#E7EAEA]/70"
-                }  px-6 py-3 rounded-full`}
+                }  px-6 py-3 rounded-full opacity-80 hover:opacity-100 transition duration-200`}
                 onClick={() => setAmount(buttonAmount)}
                 key={buttonAmount}
               >
@@ -82,30 +82,24 @@ export default function Home() {
               </button>
             ))}
           </div>
-
-          {loading ? (
-            <button
-              disabled={true}
-              className="w-full px-6 pt-2 pb-1 mt-4 text-xl font-semibold rounded-lg bg-accent"
-            >
+          <button
+            disabled={!amount || loading}
+            onClick={createCheckOutSession}
+            role="link"
+            className={`bg-accent text-xl mt-4 font-semibold flex justify-center hover:bg-transparent hover:border-accent border-2 border-accent transition duration-200 hover:text-accent items-center w-full px-6 py-3 rounded-lg ${
+              amount ? "" : "opacity-50 cursor-not-allowed"
+            }`}
+          >
+            {loading ? (
               <div
                 style={{ borderTopColor: "transparent" }}
-                className="inline-block w-8 h-8 border-4 border-solid rounded-full border-darkerBlue animate-spin"
+                className="inline-block w-6 h-6 border-4 border-solid rounded-full border-darkerBlue animate-spin"
                 role="status"
-              ></div>
-            </button>
-          ) : (
-            <button
-              disabled={!amount || loading}
-              onClick={createCheckOutSession}
-              role="link"
-              className={`bg-accent text-xl mt-4 font-semibold w-full px-6 py-3 rounded-lg ${
-                amount ? "" : "opacity-50 cursor-not-allowed"
-              }`}
-            >
-              Sponsor
-            </button>
-          )}
+              />
+            ) : (
+              <span>Sponsor</span>
+            )}
+          </button>
         </div>
       </div>
     </div>
